@@ -6,12 +6,13 @@
         "start": "webpack serve --progress",
         "build": "webpack --env=prod",
         "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
-        "prepare": "cd .. && husky install app/.husky"
+        "prepare": "husky install"
     },
     "lint-staged": {
         "src/**/*.{ts,tsx}": [
             "eslint --fix"
-        ]
+        ],
+        "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
     },
     "dependencies": {
         "@types/react": "^17.0.38",
