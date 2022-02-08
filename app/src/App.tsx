@@ -4,11 +4,10 @@ import LoadingComponent from "./components/Loading/Loading";
 import RefreshBtn from "./components/Refresh/Refresh";
 
 import Table from "./components/Table/Table";
-import { TableContext, TableContextProvider } from "./Context/TableProvider";
+
 import { GetItems } from "./services/TableApi/TableApi";
 
 const App: React.FC = () => {
-  const { data, setData } = useContext(TableContext);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<Array<IItem>>([]);
   const [errors, setErrors] = useState<string[] | null>(null);
