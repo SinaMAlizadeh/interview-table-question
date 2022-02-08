@@ -50,3 +50,8 @@ interface IPagination {
     prev: number | null;
     next: number | null;
 }
+
+interface IColumn {
+    field: string,
+    headerName: string
+}
