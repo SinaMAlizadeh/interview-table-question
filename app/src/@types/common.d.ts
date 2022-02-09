@@ -55,3 +55,8 @@ interface IColumn {
     field: string,
     headerName: string
 }
+
+interface Sorting {
+    orderBy: string,
+    type: 'ASC' | 'DESC'
+}

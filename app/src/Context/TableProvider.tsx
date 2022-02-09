@@ -2,18 +2,24 @@ import React, { useReducer, FC } from "react";
 
 type Action =
   | { type: "SeT_DATA"; payload: Array<IItem> }
-  | { type: "FILTER_DATA"; payload: string };
+  | { type: "FILTER_DATA"; payload: string }
+  | { type: "SORT_DATA"; payload: Sorting };
 
 type Dispatch = (action: Action) => void;
 
 type State = {
   data: Array<IItem>;
   filterData: Array<IItem>;
+  sorting: Sorting;
 };
 
 const initialSatet: State = {
   data: [],
   filterData: [],
+  sorting: {
+    orderBy: "",
+    type: "ASC",
+  },
 };
 
 export const TableStateContext = React.createContext<
@@ -35,6 +41,24 @@ function tableReducer(state: State = initialSatet, action: Action) {
         filterData: state.data.filter((x) =>
           x.name.toLowerCase().includes(action.payload)
         ),
+      };
+    }
+    case "SORT_DATA": {
+      let data =
+        action.payload.type == "DESC"
+          ? state.filterData.sort((a, b) =>
+              a[action.payload.orderBy] > b[action.payload.orderBy] ? 1 : -1
+            )
+          : state.filterData.sort((a, b) =>
+              a[action.payload.orderBy] < b[action.payload.orderBy] ? 1 : -1
+            );
+      return {
+        ...state,
+        filterData: data,
+        sorting: {
+          orderBy: action.payload.orderBy,
+          type: action.payload.type,
+        } as Sorting,
       };
     }
     default:
