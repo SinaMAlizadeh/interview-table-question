@@ -30,7 +30,6 @@ function tableReducer(state: State = initialSatet, action: Action) {
       };
     }
     case "FILTER_DATA": {
-      console.log(action);
       return {
         ...state,
         filterData: state.data.filter((x) =>
