@@ -4,13 +4,18 @@ import LoadingComponent from "./components/Loading/Loading";
 import RefreshBtn from "./components/Refresh/Refresh";
 
 import Table from "./components/Table/Table";
+import {
+  TableProvider,
+  TableStateContext,
+  useData,
+} from "./Context/TableProvider";
 
 import { GetItems } from "./services/TableApi/TableApi";
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [list, setList] = useState<Array<IItem>>([]);
   const [errors, setErrors] = useState<string[] | null>(null);
+  const { state, dispatch } = useData();
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +29,8 @@ const App: React.FC = () => {
     if (!success) {
       setErrors(errors);
     }
-    setList(payload);
+    dispatch({ type: "SeT_DATA", payload: payload });
+    // setList(payload);
   };
 
   return (
@@ -32,7 +38,7 @@ const App: React.FC = () => {
       {loading && <LoadingComponent />}
       <RefreshBtn refresh={getData} loading={loading} />
       {errors && <ErrorComponent errorMessages={errors} />}
-      {!errors && <Table data={list} />}
+      {!errors && <Table data={state.data} />}
     </div>
   );
 };
