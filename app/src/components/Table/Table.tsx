@@ -1,17 +1,19 @@
 import React, { useContext, useEffect } from "react";
+import { useData } from "src/Context/TableProvider";
+import Filter from "../Filter/Filter";
 import TableBody from "../TableBody/TableBody";
 import TableHeader from "../TableHeader/TableHeader";
 import { TableStyle } from "./Table.styles";
-interface TableProps {
-  data: Array<IItem>;
-}
 
-const Table = ({ data }: TableProps) => {
+const Table = () => {
   return (
-    <TableStyle>
-      <TableHeader />
-      {data && <TableBody data={data} />}
-    </TableStyle>
+    <>
+      <Filter />
+      <TableStyle>
+        <TableHeader />
+        <TableBody />
+      </TableStyle>
+    </>
   );
 };
 

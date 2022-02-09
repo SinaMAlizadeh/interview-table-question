@@ -15,7 +15,7 @@ import { GetItems } from "./services/TableApi/TableApi";
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<string[] | null>(null);
-  const { state, dispatch } = useData();
+  const { dispatch } = useData();
 
   useEffect(() => {
     setLoading(true);
@@ -38,7 +38,7 @@ const App: React.FC = () => {
       {loading && <LoadingComponent />}
       <RefreshBtn refresh={getData} loading={loading} />
       {errors && <ErrorComponent errorMessages={errors} />}
-      {!errors && <Table data={state.data} />}
+      {!errors && <Table />}
     </div>
   );
 };

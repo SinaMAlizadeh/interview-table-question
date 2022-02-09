@@ -1,12 +1,19 @@
 import React, { useReducer, FC } from "react";
 
-type Action = { type: "SeT_DATA"; payload: Array<IItem> };
+type Action =
+  | { type: "SeT_DATA"; payload: Array<IItem> }
+  | { type: "FILTER_DATA"; payload: string };
 
 type Dispatch = (action: Action) => void;
 
-type State = { data: Array<IItem> };
+type State = {
+  data: Array<IItem>;
+  filterData: Array<IItem>;
+};
+
 const initialSatet: State = {
   data: [],
+  filterData: [],
 };
 
 export const TableStateContext = React.createContext<
@@ -19,6 +26,16 @@ function tableReducer(state: State = initialSatet, action: Action) {
       return {
         ...state,
         data: action.payload,
+        filterData: action.payload,
+      };
+    }
+    case "FILTER_DATA": {
+      console.log(action);
+      return {
+        ...state,
+        filterData: state.data.filter((x) =>
+          x.name.toLowerCase().includes(action.payload)
+        ),
       };
     }
     default:

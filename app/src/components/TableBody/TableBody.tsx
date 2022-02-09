@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
+import { useData } from "src/Context/TableProvider";
 import TableRow from "../TableRow/TableRow";
 
-type HeaderProps = {
-  data: Array<IItem>;
-};
+function TableBody() {
+  const {
+    state: { filterData: data },
+  } = useData();
 
-function TableBody({ data }: HeaderProps) {
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
   return (
     <tbody>
       {data?.map((item) => (
