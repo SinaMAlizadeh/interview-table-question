@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ActionType, ChangeStatus } from "src/Context/TableActions";
 import { useData } from "src/Context/TableProvider";
 import { UpdateStatus } from "src/services/TableApi/TableApi";
 import { isTemplateTail } from "typescript";
@@ -28,12 +29,12 @@ function ChangeStatus({ selectedItem, setSelected }: ChangeStatusProps) {
     } as UpdateStatus);
     if (response.success) {
       dispatch({
-        type: "CHANGE_STATUS",
+        type: ActionType.ChangeStatus,
         payload: {
           id: selectedItem?.id,
           status: newState,
         } as UpdateStatus,
-      });
+      } as ChangeStatus);
       setSelected(null);
     }
   };
@@ -41,7 +42,7 @@ function ChangeStatus({ selectedItem, setSelected }: ChangeStatusProps) {
   return (
     <div>
       <Select
-        value={newState as string}
+        value={newState == null ? "" : newState}
         onChange={(e) => setNewState(e.target.value)}
       >
         <option value="new"> new </option>

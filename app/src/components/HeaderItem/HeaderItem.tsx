@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { ActionType, SortData } from "src/Context/TableActions";
 import { useData } from "src/Context/TableProvider";
 import { HeaderItemStyled } from "./HeaderItem.styles";
 
@@ -19,21 +20,25 @@ function HeaderItem({ field, children }: HeaderItemProps) {
     // Check if field is null not send for sorting (we dont want search)
     if (field)
       dispatch({
-        type: "SORT_DATA",
+        type: ActionType.SortDara,
         payload: {
           orderBy: field,
           type: type == "ASC" ? "DESC" : "ASC",
         } as Sorting,
-      });
+      } as SortData);
   };
 
   return (
     <HeaderItemStyled onClick={sort}>
-      {orderBy === field ? (
-        type === "DESC" ? (
-          <i> &#9650;</i>
+      {field != "" ? (
+        orderBy === field ? (
+          type === "DESC" ? (
+            <i> &#9650;</i>
+          ) : (
+            <i>&#9660;</i>
+          )
         ) : (
-          <i>&#9660;</i>
+          ""
         )
       ) : (
         ""

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ActionType, FilterData } from "src/Context/TableActions";
 import { useData } from "src/Context/TableProvider";
 import { Input } from "./Filter.styles";
 function Filter() {
@@ -10,7 +11,7 @@ function Filter() {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      dispatch({ type: "FILTER_DATA", payload: filter });
+      dispatch({ type: ActionType.FilterData, payload: filter } as FilterData);
     }, 200);
     return () => clearTimeout(delayDebounceFn);
   }, [filter]);

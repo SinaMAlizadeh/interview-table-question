@@ -20,6 +20,10 @@ width : 500px;
 background-color : #fff;
 padding : 10px;
 border-radius : 0.3rem;
+margin : 20px 0;
+@media only screen and (max-width: 510px) {
+  width : 90%;
+}
 `;
 
 export const ModalHeader = styled.div`

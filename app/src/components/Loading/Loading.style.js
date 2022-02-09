@@ -13,9 +13,19 @@ const Loading = styled.div`
   border: 5px solid #f3f3f3;
   border-top: 5px solid #3498db;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   animation: ${breatheAnimation} 2s linear infinite;
 `;
 
-export { Loading };
+const LoadingContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffffa8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export { Loading, LoadingContainer };

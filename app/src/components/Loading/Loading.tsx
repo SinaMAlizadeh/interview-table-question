@@ -1,7 +1,11 @@
 import React from "react";
-import { Loading } from "./Loading.style";
+import { Loading, LoadingContainer } from "./Loading.style";
 
 function LoadingComponent() {
-  return <Loading />;
+  return (
+    <LoadingContainer>
+      <Loading />
+    </LoadingContainer>
+  );
 }
 export default LoadingComponent;

@@ -1,12 +1,6 @@
 import React, { useReducer, FC } from "react";
-
-type Action =
-  | { type: "SeT_DATA"; payload: Array<IItem> }
-  | { type: "FILTER_DATA"; payload: string }
-  | { type: "SORT_DATA"; payload: Sorting }
-  | { type: "CHANGE_STATUS"; payload: UpdateStatus };
-
-type Dispatch = (action: Action) => void;
+import { ChangeStatusData, filterData, SortingData } from "src/services/Helper";
+import { Action, ActionType, Dispatch } from "./TableActions";
 
 type State = {
   data: Array<IItem>;
@@ -29,60 +23,46 @@ export const TableStateContext = React.createContext<
 
 function tableReducer(state: State = initialSatet, action: Action) {
   switch (action.type) {
-    case "SeT_DATA": {
+    case ActionType.SetData: {
       return {
         ...state,
         data: action.payload,
         filterData: action.payload,
       };
     }
-    case "FILTER_DATA": {
+    case ActionType.FilterData: {
       return {
         ...state,
-        filterData: state.data.filter((x) =>
-          x.name.toLowerCase().includes(action.payload)
-        ),
+        filterData: filterData<IItem>(state.data, action.payload, "name"),
       };
     }
-    case "SORT_DATA": {
-      let data =
-        action.payload.type == "DESC"
-          ? state.filterData.sort((a, b) =>
-              a[action.payload.orderBy] > b[action.payload.orderBy] ? 1 : -1
-            )
-          : state.filterData.sort((a, b) =>
-              a[action.payload.orderBy] < b[action.payload.orderBy] ? 1 : -1
-            );
+    case ActionType.SortDara: {
       return {
         ...state,
-        filterData: data,
+        filterData: SortingData<IItem>(
+          state.filterData,
+          action.payload.type,
+          action.payload.orderBy
+        ),
         sorting: {
           orderBy: action.payload.orderBy,
           type: action.payload.type,
         } as Sorting,
       };
     }
-    case "CHANGE_STATUS": {
-      debugger;
-
+    case ActionType.ChangeStatus: {
       return {
         ...state,
-        data: state.data.map((item) => {
-          if (item.id == action.payload.id)
-            return {
-              ...item,
-              status: action.payload.status,
-            } as IItem;
-          return item;
-        }),
-        filterData: state.filterData.map((item) => {
-          if (item.id == action.payload.id)
-            return {
-              ...item,
-              status: action.payload.status,
-            } as IItem;
-          return item;
-        }),
+        data: ChangeStatusData(
+          state.data,
+          action.payload.id,
+          action.payload.status
+        ),
+        filterData: ChangeStatusData(
+          state.filterData,
+          action.payload.id,
+          action.payload.status
+        ),
       };
     }
     default:

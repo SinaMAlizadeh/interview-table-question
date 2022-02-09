@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../TableRow/TableRow.styles";
 type RefreshProps = {
   refresh: () => void;
   loading: boolean;
@@ -7,9 +8,9 @@ type RefreshProps = {
 function RefreshBtn({ refresh, loading }: RefreshProps) {
   return (
     <div>
-      <button onClick={refresh} disabled={loading}>
-        Refresh
-      </button>
+      <Button onClick={refresh} disabled={loading}>
+        &#8635; Refresh
+      </Button>
     </div>
   );
 }

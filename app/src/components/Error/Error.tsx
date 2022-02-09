@@ -1,5 +1,5 @@
 import React from "react";
-import { Error } from "./Error.styles.js";
+import { Error } from "./Error.styles";
 type ErrorProps = {
   errorMessages: string[] | undefined;
 };
@@ -7,8 +7,11 @@ type ErrorProps = {
 function ErrorComponent({ errorMessages }: ErrorProps) {
   return (
     <Error>
-      {errorMessages?.map((item) => (
-        <div>{item}</div>
+      <div>
+        <span> &#9888;</span> Something wrong
+      </div>
+      {errorMessages?.map((item, index) => (
+        <div key={index}>{item}</div>
       ))}
     </Error>
   );
