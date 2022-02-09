@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import ChangeStatus from "../ChangeStatus/ChangeStatus";
 import ImageComponent from "../Image/ImageComponent";
-import { SpanStyle } from "./TableRow.styles";
+import { Button, SpanStyle } from "./TableRow.styles";
 
 type TableRowProps = {
   item: IItem;
 };
 
 function TableRow({ item }: TableRowProps) {
+  const [selected, setSelected] = useState<IItem | null>(null);
+
   return (
     <>
       <td>{item?.id}</td>
@@ -16,7 +19,14 @@ function TableRow({ item }: TableRowProps) {
       <td>{item.date}</td>
       <td>{item?.name}</td>
       <td>
-        <SpanStyle status={item.status}>{item?.status}</SpanStyle>
+        {selected ? (
+          <ChangeStatus selectedItem={selected} setSelected={setSelected} />
+        ) : (
+          <SpanStyle status={item.status}>{item?.status}</SpanStyle>
+        )}
+      </td>
+      <td>
+        <Button onClick={() => setSelected(item)}>Change Status</Button>
       </td>
     </>
   );

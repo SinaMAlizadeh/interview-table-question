@@ -60,3 +60,8 @@ interface Sorting {
     orderBy: string,
     type: 'ASC' | 'DESC'
 }
+
+interface UpdateStatus {
+    id: number,
+    status: string
+}

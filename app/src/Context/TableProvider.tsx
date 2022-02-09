@@ -3,7 +3,8 @@ import React, { useReducer, FC } from "react";
 type Action =
   | { type: "SeT_DATA"; payload: Array<IItem> }
   | { type: "FILTER_DATA"; payload: string }
-  | { type: "SORT_DATA"; payload: Sorting };
+  | { type: "SORT_DATA"; payload: Sorting }
+  | { type: "CHANGE_STATUS"; payload: UpdateStatus };
 
 type Dispatch = (action: Action) => void;
 
@@ -61,6 +62,29 @@ function tableReducer(state: State = initialSatet, action: Action) {
         } as Sorting,
       };
     }
+    case "CHANGE_STATUS": {
+      debugger;
+
+      return {
+        ...state,
+        data: state.data.map((item) => {
+          if (item.id == action.payload.id)
+            return {
+              ...item,
+              status: action.payload.status,
+            } as IItem;
+          return item;
+        }),
+        filterData: state.filterData.map((item) => {
+          if (item.id == action.payload.id)
+            return {
+              ...item,
+              status: action.payload.status,
+            } as IItem;
+          return item;
+        }),
+      };
+    }
     default:
       return state;
   }
@@ -68,8 +92,6 @@ function tableReducer(state: State = initialSatet, action: Action) {
 
 const TableProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(tableReducer, initialSatet);
-  // NOTE: you *might* need to memoize this value
-  // Learn more in http://kcd.im/optimize-context
   const value = { state, dispatch };
   return (
     <TableStateContext.Provider value={value}>

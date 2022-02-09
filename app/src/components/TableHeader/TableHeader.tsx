@@ -21,6 +21,7 @@ function TableHeader() {
         <th>
           <HeaderItem field="status">Status</HeaderItem>
         </th>
+        <th>Operation</th>
       </tr>
     </thead>
   );

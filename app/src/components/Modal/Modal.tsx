@@ -37,7 +37,7 @@ function ModalComponent({ show, url, close }: ModalComponentProps) {
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
           <ModalTitle>Header</ModalTitle>
-          <CloseBtn onClick={close}>&#9932;</CloseBtn>
+          <CloseBtn onClick={close}>&#10005;</CloseBtn>
         </ModalHeader>
         <ModalBody>
           <img src={url} alt="..." loading="lazy" />
