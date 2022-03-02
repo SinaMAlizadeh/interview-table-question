@@ -58,8 +58,9 @@ interface IColumn {
 
 interface Sorting {
     orderBy: string,
-    type: 'ASC' | 'DESC'
+    type: "ASC" | "DESC"
 }
+
 
 interface UpdateStatus {
     id: number,

@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
 type ImageProps = {
-    src: string,
-    placeholder: string
+    src: string | null,
+    placeholder: string | null
 }
 
 export const Image = styled.div<ImageProps>`

@@ -11,7 +11,7 @@ function Filter() {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      dispatch({ type: ActionType.FilterData, payload: filter } as FilterData);
+      dispatch({ type: ActionType.FilterData, payload: filter } );
     }, 200);
     return () => clearTimeout(delayDebounceFn);
   }, [filter]);

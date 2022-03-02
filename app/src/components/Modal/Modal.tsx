@@ -10,7 +10,7 @@ import {
 
 type ModalComponentProps = {
   show: boolean;
-  url: string;
+  url: string | null ;
   close: () => void;
 };
 
@@ -19,13 +19,14 @@ function ModalComponent({ show, url, close }: ModalComponentProps) {
     return null;
   }
 
-  const closeOnescapeKeyDown = (e) => {
-    if ((e.chartCode || e.keyCode) === 27) {
-      close();
-    }
-  };
 
   useEffect(() => {
+    const closeOnescapeKeyDown = (e : KeyboardEvent ) => {
+      if ((e.key) === "Escape") {
+        close();
+      }
+    };
+  
     document.body.addEventListener("keydown", closeOnescapeKeyDown);
     () => {
       document.body.removeEventListener("keydown", closeOnescapeKeyDown);
@@ -40,7 +41,7 @@ function ModalComponent({ show, url, close }: ModalComponentProps) {
           <CloseBtn onClick={close}>&#10005;</CloseBtn>
         </ModalHeader>
         <ModalBody>
-          <img src={url} alt="..." loading="lazy" />
+          <img src={url == null ? '' : url} alt="..." loading="lazy" />
         </ModalBody>
       </ModalContent>
     </Modal>

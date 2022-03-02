@@ -18,11 +18,11 @@ function ImageComponent({ url }: IamgeProps) {
   return (
     <>
       <Image
-        src={url as string}
+        src={url}
         placeholder={Diamond}
         onClick={() => (url != null ? setShow(true) : null)}
       />
-      <ModalComponent show={show} url={url as string} close={closeModal} />
+      <ModalComponent show={show} url={url} close={closeModal} />
     </>
   );
 }

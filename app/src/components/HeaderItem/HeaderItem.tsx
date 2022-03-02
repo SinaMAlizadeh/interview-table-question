@@ -4,7 +4,7 @@ import { useData } from "src/Context/TableProvider";
 import { HeaderItemStyled } from "./HeaderItem.styles";
 
 type HeaderItemProps = {
-  field: String;
+  field: string;
   children: React.ReactNode;
 };
 
@@ -23,9 +23,9 @@ function HeaderItem({ field, children }: HeaderItemProps) {
         type: ActionType.SortDara,
         payload: {
           orderBy: field,
-          type: type == "ASC" ? "DESC" : "ASC",
-        } as Sorting,
-      } as SortData);
+          type: type == "ASC" ? "DESC" : "ASC" 
+        },
+      });
   };
 
   return (
