@@ -47,7 +47,7 @@ function tableReducer(state: State = initialSatet, action: Action) {
         sorting: {
           orderBy: action.payload.orderBy,
           type: action.payload.type,
-        } as Sorting,
+        },
       };
     }
     case ActionType.ChangeStatus: {

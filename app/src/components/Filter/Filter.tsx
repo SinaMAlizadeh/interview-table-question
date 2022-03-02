@@ -5,7 +5,7 @@ import { Input } from "./Filter.styles";
 function Filter() {
   const [filter, setFilter] = useState("");
   const { dispatch } = useData();
-  const changeFilter = (e) => {
+  const changeFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
   };
 
@@ -20,7 +20,7 @@ function Filter() {
     <div>
       <Input
         type="text"
-        onChange={changeFilter}
+        onChange={(e) => changeFilter(e)}
         placeholder="Search by name..."
       />
     </div>
